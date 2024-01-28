@@ -1,0 +1,8 @@
+# Configuration for environment 1
+
+# Inherit from the base configuration
+inherit_from: "base_config.yml"
+
+url : 'https://www.saucedemo.com/'
+user_name : 'problem_user'
+user_password : 'secret_sauce'
