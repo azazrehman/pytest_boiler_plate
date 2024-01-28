@@ -1,0 +1,11 @@
+# Automation tool - selenium, playwright
+automation_tool : 'selenium'
+# Browser - chrome, firefox
+browser: 'chrome'
+
+# Default wait times
+wait:
+  page_load: 30
+  element_visible: 10
+  element_clickable: 5
+
