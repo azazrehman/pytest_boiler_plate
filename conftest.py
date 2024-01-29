@@ -1,34 +1,40 @@
+import os,sys
+sys.path.append(os.getcwd())
+
 import pytest
-from selenium import webdriver
+from src.utils.bot_handlers.bots.bot_playwright import BotPlaywright
+from src.utils.bot_handlers.bots.bot_selenium import BotSelenium
 
-from playwright.sync_api import sync_playwright
 
-class Base:
 
-    def common_config(self):
-        pytest.web_bot = None
-        pytest.mobile_bot = None
+def common_config():
+    print('Conftest Comon config')
+    pytest.web_bot = None
+    pytest.mobile_bot = None
 
-    #@pytest.fixture(scope='session', autouse=True)
-    def before_all(self):
-        print(f'Before All :)')
+@pytest.fixture(scope='session', autouse=True)
+def before_all():
+    print(f'Before All :)')
+        # TODO - Update it to use from config
+    frame_work = 'playwright' 
+    browser = 'chrome'
+    if frame_work == 'selenium':
+        print('Inside selenium - Before')
+        pytest.web_bot = BotSelenium(browser_on_tests_execute=browser)
+    elif frame_work == 'playwright':
+        pytest.web_bot = BotPlaywright(browser_on_tests_execute=browser)
 
-    def setup_method(self, method):
-        print(f'Setup Method :)')
-         # TODO - Update it to use from config
-        frame_work = 'selenium' 
-        browser = 'chrome'
-        if frame_work is 'selenium':
-             self.run_with_selenium(browser)
-        elif frame_work is 'playwright':
-             self.run_with_playwright('chromium')
+def setup_method(self, method):
+    print(f'Setup Method :)')
+        # TODO - Update it to use from config
+    frame_work = 'selenium' 
+    browser = 'chrome'
+    if frame_work == 'selenium':
+            print('Inside selenium - Setup mothod')
+            pytest.web_bot = BotSelenium(browser_on_tests_execute=browser)
+    elif frame_work == 'playwright':
+            pytest.web_bot = BotPlaywright(browser_on_tests_execute=browser)
 
-    def teardown_method(self, method):
-         print(f'TearDown Method :)')
+def teardown_method(self, method):
+        print(f'TearDown Method :)')
 
-    def run_with_selenium(browser):
-        if browser is 'chrome':
-                pytest.web_bot = webdriver.Chrome()
-    def run_with_playwright(browser):
-        with sync_playwright() as playwright:
-            browser = playwright.browser.launch()
