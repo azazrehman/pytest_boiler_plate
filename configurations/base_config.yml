@@ -2,8 +2,11 @@
 automation_tool : 'selenium'
 # Browser - chrome, firefox
 browser: 'chrome'
-
-# Default wait times
+# Chrome or Firefox path - e.g: '/Users/azazurrehman/Downloads/chromedriver-mac-x64 4/chromedriver'
+driver_path: '/Users/azazurrehman/Downloads/chromedriver-mac-x64 4/chromedriver'
+# Environment Name
+environment_to_execute: 'env1'
+# Default wait times (sec)
 wait:
   page_load: 30
   element_visible: 10

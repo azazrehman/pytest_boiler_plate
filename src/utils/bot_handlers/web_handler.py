@@ -1,4 +1,5 @@
 import pytest
+from src.utils.logger import logger
 
 class WebHandler:
 
@@ -11,5 +12,7 @@ class WebHandler:
         try:
             pytest.web_bot.open_url(url_to_open=pstr_url)
         except Exception as e:
-            raise Exception("Error occurred while opening the url " + pstr_url + "-->", e)
+            error_message = f"Error occurred while opening the url {pstr_url} --> {e}"
+            logger.error(error_message)
+            raise Exception(error_message)
         
