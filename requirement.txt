@@ -2,7 +2,8 @@ pytest==7.3.1
 selenium==4.9.0
 playwright==1.32.1
 pytest-html-reporter==0.2.9
-pytest-dependency
-Pillow
+pytest-dependency==0.6.0
+Pillow==10.2.0
 pytest-rerunfailures==11.1.2
 pytest-xdist==3.2.1
+PyYAML==6.0.1

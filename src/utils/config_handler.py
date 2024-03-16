@@ -2,16 +2,18 @@ import yaml
 from src.utils.command_line_utils import CommandLineUtils
 from src.utils.path_handler import PathHandler
 from src.utils.logger import logger
-command_line = CommandLineUtils()
+
 
 class ConfigHandler:
 
     config_content = None
+    command_line = CommandLineUtils()
     BASE_CONFIG_FILE_PATH = 'base_config.yml'
     ENV_KEY = 'environment_to_execute'
     AUTOMATION_TOOL_KEY = 'automation_tool'
     BROWSER_KEY = 'browser'
     DRIVER_PATH = 'driver_path'
+    BROWSER_URL = 'url'
     
     def __init__(self):
         
@@ -40,7 +42,8 @@ class ConfigHandler:
     def read_config(self,base_config_file_content, env_name):
         try:
             # Load environment-specific config
-            env_config_file = f"{env_name}_config.yml"
+            config_folder_path  = f"{PathHandler().get_base_config_path(folder_only=True)}"
+            env_config_file = f"{config_folder_path}/{env_name}_config.yml"
 
             with open(env_config_file, 'r') as env_file:
                 env_config = yaml.safe_load(env_file)
@@ -55,12 +58,14 @@ class ConfigHandler:
     
     def get_env_name(self, base_config):
         try:
-            command_line_value = command_line.get_value_from_key('environment_to_execute')
+            command_line_value = self.command_line.get_value_from_key('environment_to_execute')
             if command_line_value is None:
-                logger.debug(f"Fetching value of environment_to_execute from the base config as not getting value from environment variable")
+                logger.debug(f"Fetching value of environment_to_execute from the base config as not getting value "
+                             f"from environment variable")
                 return base_config['environment_to_execute']
             else:
-                logger.debug(f"Fetching value of environment_to_execute from the environment variabels, becasue thats have a priority")
+                logger.debug(f"Fetching value of environment_to_execute from the environment variabels, becasue thats "
+                             f"have a priority")
                 return command_line_value
         except Exception as e:
             error_message = f"Error while getting enviroment name {e}"
@@ -75,5 +80,8 @@ class ConfigHandler:
     
     def get_browser_driver_path(self):
         return self.get_value(self.DRIVER_PATH)
+
+    def get_base_url_browser(self):
+        return self.get_value(self.BROWSER_URL)
     
     

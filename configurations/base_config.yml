@@ -1,9 +1,9 @@
 # Automation tool - selenium, playwright
-automation_tool : 'selenium'
+automation_tool : 'playwright'
 # Browser - chrome, firefox
 browser: 'chrome'
 # Chrome or Firefox path - e.g: '/Users/azazurrehman/Downloads/chromedriver-mac-x64 4/chromedriver'
-driver_path: '/Users/azazurrehman/Downloads/chromedriver-mac-x64 4/chromedriver'
+driver_path: '/Users/azazurrehman/Desktop/work_azaz/pytest_boiler_plate/pytest_boiler_plate/drivers/chromedriver'
 # Environment Name
 environment_to_execute: 'env1'
 # Default wait times (sec)
