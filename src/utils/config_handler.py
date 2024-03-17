@@ -14,6 +14,7 @@ class ConfigHandler:
     BROWSER_KEY = 'browser'
     DRIVER_PATH = 'driver_path'
     BROWSER_URL = 'url'
+    WAITS = 'waits'
     
     def __init__(self):
         

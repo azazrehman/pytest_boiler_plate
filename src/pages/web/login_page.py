@@ -56,19 +56,18 @@ class WebLoginPage:
     #     except Exception as e:
     #         raise Exception("Exception occured while navigating to sensing login page -->", e)
 
-    # def login(self, pstr_user_type):
-    #     """
-    #     This method is used to perform login
-    #     param: user type
-    #     """
-    #     try:
-    #         username, password = self.yaml_handler.get_user_credentials(pstr_user_type)
-    #         self.enter_username(username)
-    #         self.enter_password(password)
-    #         self.click_login_btn()
-    #         self.driver_handler.take_screen_shot(name="login",attach_to_report=True)
-    #     except Exception as e:
-    #         raise Exception("Exception occurred while performing login -->", e)
+    def login(self):
+        """
+        This method is used to perform login
+        """
+        try:
+            username, password = self.yaml_handler.get_user_credentials()
+            self.enter_username(username)
+            self.enter_password(password)
+            self.click_login_btn()
+            self.driver_handler.take_screen_shot(name="login",attach_to_report=True)
+        except Exception as e:
+            raise Exception("Exception occurred while performing login -->", e)
 
 
 
