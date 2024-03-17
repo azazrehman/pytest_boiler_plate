@@ -28,10 +28,11 @@ class ConfigHandler:
         try:
             command_line_value = self.command_line.get_value_from_key(key)
             if command_line_value is None:
-                logger.debug(f"Fetching value of {key} from the base config as not getting value from environment variable")
+                logger.debug(f"Fetching value of {key} from the base config as not getting value from environment "
+                             f"variable")
                 return self.config_content[key]
             else:
-                logger.debug(f"Fetching value of {key} from the environment variabels, becasue thats have a priority")
+                logger.debug(f"Fetching value of {key} from the environment variables, because that's have a priority")
                 return command_line_value
         except KeyError:
             logger.error(f"KeyError: '{key}' not found in configuration")
@@ -84,5 +85,7 @@ class ConfigHandler:
 
     def get_base_url_browser(self):
         return self.get_value(self.BROWSER_URL)
-    
+
+    def get_waits(self):
+        return self.get_value(self.WAITS)
     
