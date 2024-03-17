@@ -1,6 +1,5 @@
 import os, sys, shutil
 
-
 sys.path.append(os.getcwd())
 
 import pytest
@@ -33,8 +32,11 @@ class BaseCase:
             pytest.web_bot = BotSelenium(browser_on_tests_execute=browser, driver_path=driver_path)
         elif frame_work.lower() == 'playwright':
             pytest.web_bot = BotPlaywright(browser_on_tests_execute=browser)
+        if os.path.exists(f"{screen_shot_folder}"):
+            shutil.rmtree(screen_shot_folder)
+            os.mkdir(screen_shot_folder)
 
-    def setup_method(self,method):
+    def setup_method(self, method):
         try:
             pytest.current_test_name = method.__name__
             if not os.path.exists(f"{screen_shot_folder}/{pytest.current_test_name}"):
@@ -59,7 +61,7 @@ class BaseCase:
     def teardown_method(self):
         try:
             logger.debug(f"Inside After Each method of the test {pytest.current_test_name}")
-            # pytest.web_bot.quit_browser()
+            pytest.web_bot.quit_browser()
             self.generate_gifs(pytest.current_test_name)
         except Exception as e:
             error_message = f"Error in After Each Method for Test {pytest.current_test_name} {str(e)}"
@@ -71,7 +73,7 @@ class BaseCase:
         except Exception as e:
             print(str(e))
 
-    def generate_gifs(self,test_case_name):
+    def generate_gifs(self, test_case_name):
         try:
             import os
             from PIL import Image
