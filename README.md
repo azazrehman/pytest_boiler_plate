@@ -21,3 +21,6 @@ source azaz_venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Executing the tests
+```
+pytest src/tests/web --html-report=<Your_REPORT_NAME>
